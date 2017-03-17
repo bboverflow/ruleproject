@@ -1,0 +1,10 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+<!--用户管理service-->
+	<bean id="userService" class="cn.trusteye.base.service.impl.UserServiceImpl"/>
+<!-- F2 service -->
+	<bean id="f2Service" class="cn.trusteye.f2.service.impl.F2ServiceImpl"/>
+</beans>

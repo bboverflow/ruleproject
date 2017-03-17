@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.trusteye.f2.mapper.F2sesnkeySetMapperCustom">
+
+    <sql id="Where_Clause">
+        <if test="f2sesnkeySetCustom!=null">
+            <if test="f2sesnkeySetCustom.sesnkey!=null and f2sesnkeySetCustom.sesnkey!=''">
+                and sesnkey = #{f2sesnkeySetCustom.sesnkey}
+            </if>
+            <if test="f2sesnkeySetCustom.devNo!=null and f2sesnkeySetCustom.devNo!=''">
+                and devNo LIKE '%${f2sesnkeySetCustom.devNo}%'
+            </if>
+            <if test="f2sesnkeySetCustom.captureTime!=null and f2sesnkeySetCustom.captureTime!=''">
+                and captureTime LIKE '%${f2sesnkeySetCustom.captureTime}%'
+            </if>
+            <if test="f2sesnkeySetCustom.restoreTime!=null and f2sesnkeySetCustom.restoreTime!=''">
+                and restoreTime LIKE '%${f2sesnkeySetCustom.restoreTime}%'
+            </if>
+        </if>
+    </sql>
+
+    <select id="findSessionCount" parameterType="cn.trusteye.f2.pojo.vo.F2sessionQueryVo"
+            resultType="Integer">
+        SELECT COUNT(*) FROM f2sesnkey_set
+        <where>
+            <include refid="Where_Clause"/>
+        </where>
+    </select>
+
+    <select id="findSessionList" parameterType="cn.trusteye.f2.pojo.vo.F2sessionQueryVo"
+            resultMap="sessionResultMap">
+        SELECT * FROM (
+        SELECT t.*,row_number() over(ORDER BY timestamp DESC) r
+        FROM f2sesnkey_set t
+        <where>
+            <include refid="Where_Clause"/>
+        </where>
+        )
+        WHERE r BETWEEN ${pageQuery.PageQuery_start} AND ${pageQuery.PageQuery_end}
+    </select>
+
+    <resultMap id="sessionResultMap" type="cn.trusteye.f2.pojo.pocustom.F2sesnkeySetCustom">
+        <id column="capture_time" property="captureTime"/>
+        <id column="restore_time" property="restoreTime"/>
+        <id column="update_Time" property="updateTime"/>
+    </resultMap>
+
+</mapper>

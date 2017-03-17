@@ -1,0 +1,16 @@
+{
+   "menus" : [{"icon" : "icon-sys","menuid" : "1","menuname" : "F2流量","url" : "","menus" :
+                [{"icon" : "icon-log","menuid" : "1_1","menuname" : "价值POST数据","url" : "/f2/queryPost.action"
+                   },
+                   {"icon" : "icon-log","menuid" : "1_2","menuname" : "F2流量分析","url" : "/f2/querySession.action"
+                   },
+                   {"icon" : "icon-log","menuid" : "1_3","menuname" : "智能搜索","url" : "/f2/queryfulltext.action"
+                   },
+                   {"icon" : "icon-log","menuid" : "1_4","menuname" : "预定义敏感词","url" : "/f2/queryWord.action"
+                   },
+                   {"icon" : "icon-log","menuid" : "1_5","menuname" : "预定义敏感网站","url" : "/f2/queryweb.action"
+                   },
+                   {"icon" : "icon-log","menuid" : "1_6","menuname" : "可疑对象跟踪","url" : "/f2/queryobject.action"
+                 }]
+   }]
+}

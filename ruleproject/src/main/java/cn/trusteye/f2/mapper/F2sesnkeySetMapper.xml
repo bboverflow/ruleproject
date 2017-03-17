@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.trusteye.f2.mapper.F2sesnkeySetMapper">
+  <resultMap id="BaseResultMap" type="cn.trusteye.f2.pojo.po.F2sesnkeySet">
+    <result column="SESNKEY" jdbcType="VARCHAR" property="sesnkey" />
+    <result column="ALLNUM" jdbcType="DECIMAL" property="allnum" />
+    <result column="NEWNUM" jdbcType="DECIMAL" property="newnum" />
+    <result column="POST_ALLNUM" jdbcType="DECIMAL" property="postAllnum" />
+    <result column="POST_NEWNUM" jdbcType="DECIMAL" property="postNewnum" />
+    <result column="GET_ALLNUM" jdbcType="DECIMAL" property="getAllnum" />
+    <result column="GET_NEWNUM" jdbcType="DECIMAL" property="getNewnum" />
+    <result column="RESPONSE_ALLNUM" jdbcType="DECIMAL" property="responseAllnum" />
+    <result column="RESPONSE_NEWNUM" jdbcType="DECIMAL" property="responseNewnum" />
+    <result column="OTHER_ALLNUM" jdbcType="DECIMAL" property="otherAllnum" />
+    <result column="OTHER_NEWNUM" jdbcType="DECIMAL" property="otherNewnum" />
+    <result column="REALNICMAC" jdbcType="VARCHAR" property="realnicmac" />
+    <result column="NETWORK_CARD" jdbcType="VARCHAR" property="networkCard" />
+    <result column="PCNAME" jdbcType="VARCHAR" property="pcname" />
+    <result column="F2VERSION" jdbcType="VARCHAR" property="f2version" />
+    <result column="ACCESSMODE" jdbcType="VARCHAR" property="accessmode" />
+    <result column="BROWSER" jdbcType="VARCHAR" property="browser" />
+    <result column="SYSTEMINFO" jdbcType="VARCHAR" property="systeminfo" />
+    <result column="IPADDRESS" jdbcType="DECIMAL" property="ipaddress" />
+    <result column="TIMESTAMP" jdbcType="DECIMAL" property="timestamp" />
+    <result column="SERVER_NO" jdbcType="VARCHAR" property="serverNo" />
+    <result column="F2IP" jdbcType="DECIMAL" property="f2ip" />
+    <result column="CAPTURE_TIME" jdbcType="TIMESTAMP" property="captureTime" />
+    <result column="RESTORE_TIME" jdbcType="TIMESTAMP" property="restoreTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="DEV_NO" jdbcType="VARCHAR" property="devNo" />
+    <result column="SLOCATION" jdbcType="VARCHAR" property="slocation" />
+    <result column="LOC_INFO_TIME" jdbcType="TIMESTAMP" property="locInfoTime" />
+    <result column="ACCESS_WAY" jdbcType="DECIMAL" property="accessWay" />
+    <result column="IMSI" jdbcType="VARCHAR" property="imsi" />
+    <result column="MSISDN" jdbcType="VARCHAR" property="msisdn" />
+    <result column="LOC_INFO_CONTENTID" jdbcType="DECIMAL" property="locInfoContentid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SESNKEY, ALLNUM, NEWNUM, POST_ALLNUM, POST_NEWNUM, GET_ALLNUM, GET_NEWNUM, RESPONSE_ALLNUM, 
+    RESPONSE_NEWNUM, OTHER_ALLNUM, OTHER_NEWNUM, REALNICMAC, NETWORK_CARD, PCNAME, F2VERSION, 
+    ACCESSMODE, BROWSER, SYSTEMINFO, IPADDRESS, TIMESTAMP, SERVER_NO, F2IP, CAPTURE_TIME, 
+    RESTORE_TIME, UPDATE_TIME, DEV_NO, SLOCATION, LOC_INFO_TIME, ACCESS_WAY, IMSI, MSISDN, 
+    LOC_INFO_CONTENTID
+  </sql>
+  <select id="selectByExample" parameterType="cn.trusteye.f2.pojo.po.F2sesnkeySetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from F2SESNKEY_SET
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.trusteye.f2.pojo.po.F2sesnkeySetExample">
+    delete from F2SESNKEY_SET
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.trusteye.f2.pojo.po.F2sesnkeySet">
+    insert into F2SESNKEY_SET (SESNKEY, ALLNUM, NEWNUM, 
+      POST_ALLNUM, POST_NEWNUM, GET_ALLNUM, 
+      GET_NEWNUM, RESPONSE_ALLNUM, RESPONSE_NEWNUM, 
+      OTHER_ALLNUM, OTHER_NEWNUM, REALNICMAC, 
+      NETWORK_CARD, PCNAME, F2VERSION, 
+      ACCESSMODE, BROWSER, SYSTEMINFO, 
+      IPADDRESS, TIMESTAMP, SERVER_NO, 
+      F2IP, CAPTURE_TIME, RESTORE_TIME, 
+      UPDATE_TIME, DEV_NO, SLOCATION, 
+      LOC_INFO_TIME, ACCESS_WAY, IMSI, 
+      MSISDN, LOC_INFO_CONTENTID)
+    values (#{sesnkey,jdbcType=VARCHAR}, #{allnum,jdbcType=DECIMAL}, #{newnum,jdbcType=DECIMAL}, 
+      #{postAllnum,jdbcType=DECIMAL}, #{postNewnum,jdbcType=DECIMAL}, #{getAllnum,jdbcType=DECIMAL}, 
+      #{getNewnum,jdbcType=DECIMAL}, #{responseAllnum,jdbcType=DECIMAL}, #{responseNewnum,jdbcType=DECIMAL}, 
+      #{otherAllnum,jdbcType=DECIMAL}, #{otherNewnum,jdbcType=DECIMAL}, #{realnicmac,jdbcType=VARCHAR}, 
+      #{networkCard,jdbcType=VARCHAR}, #{pcname,jdbcType=VARCHAR}, #{f2version,jdbcType=VARCHAR}, 
+      #{accessmode,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, #{systeminfo,jdbcType=VARCHAR}, 
+      #{ipaddress,jdbcType=DECIMAL}, #{timestamp,jdbcType=DECIMAL}, #{serverNo,jdbcType=VARCHAR}, 
+      #{f2ip,jdbcType=DECIMAL}, #{captureTime,jdbcType=TIMESTAMP}, #{restoreTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{devNo,jdbcType=VARCHAR}, #{slocation,jdbcType=VARCHAR}, 
+      #{locInfoTime,jdbcType=TIMESTAMP}, #{accessWay,jdbcType=DECIMAL}, #{imsi,jdbcType=VARCHAR}, 
+      #{msisdn,jdbcType=VARCHAR}, #{locInfoContentid,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.trusteye.f2.pojo.po.F2sesnkeySet">
+    insert into F2SESNKEY_SET
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sesnkey != null">
+        SESNKEY,
+      </if>
+      <if test="allnum != null">
+        ALLNUM,
+      </if>
+      <if test="newnum != null">
+        NEWNUM,
+      </if>
+      <if test="postAllnum != null">
+        POST_ALLNUM,
+      </if>
+      <if test="postNewnum != null">
+        POST_NEWNUM,
+      </if>
+      <if test="getAllnum != null">
+        GET_ALLNUM,
+      </if>
+      <if test="getNewnum != null">
+        GET_NEWNUM,
+      </if>
+      <if test="responseAllnum != null">
+        RESPONSE_ALLNUM,
+      </if>
+      <if test="responseNewnum != null">
+        RESPONSE_NEWNUM,
+      </if>
+      <if test="otherAllnum != null">
+        OTHER_ALLNUM,
+      </if>
+      <if test="otherNewnum != null">
+        OTHER_NEWNUM,
+      </if>
+      <if test="realnicmac != null">
+        REALNICMAC,
+      </if>
+      <if test="networkCard != null">
+        NETWORK_CARD,
+      </if>
+      <if test="pcname != null">
+        PCNAME,
+      </if>
+      <if test="f2version != null">
+        F2VERSION,
+      </if>
+      <if test="accessmode != null">
+        ACCESSMODE,
+      </if>
+      <if test="browser != null">
+        BROWSER,
+      </if>
+      <if test="systeminfo != null">
+        SYSTEMINFO,
+      </if>
+      <if test="ipaddress != null">
+        IPADDRESS,
+      </if>
+      <if test="timestamp != null">
+        TIMESTAMP,
+      </if>
+      <if test="serverNo != null">
+        SERVER_NO,
+      </if>
+      <if test="f2ip != null">
+        F2IP,
+      </if>
+      <if test="captureTime != null">
+        CAPTURE_TIME,
+      </if>
+      <if test="restoreTime != null">
+        RESTORE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="devNo != null">
+        DEV_NO,
+      </if>
+      <if test="slocation != null">
+        SLOCATION,
+      </if>
+      <if test="locInfoTime != null">
+        LOC_INFO_TIME,
+      </if>
+      <if test="accessWay != null">
+        ACCESS_WAY,
+      </if>
+      <if test="imsi != null">
+        IMSI,
+      </if>
+      <if test="msisdn != null">
+        MSISDN,
+      </if>
+      <if test="locInfoContentid != null">
+        LOC_INFO_CONTENTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sesnkey != null">
+        #{sesnkey,jdbcType=VARCHAR},
+      </if>
+      <if test="allnum != null">
+        #{allnum,jdbcType=DECIMAL},
+      </if>
+      <if test="newnum != null">
+        #{newnum,jdbcType=DECIMAL},
+      </if>
+      <if test="postAllnum != null">
+        #{postAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="postNewnum != null">
+        #{postNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="getAllnum != null">
+        #{getAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="getNewnum != null">
+        #{getNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="responseAllnum != null">
+        #{responseAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="responseNewnum != null">
+        #{responseNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="otherAllnum != null">
+        #{otherAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="otherNewnum != null">
+        #{otherNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="realnicmac != null">
+        #{realnicmac,jdbcType=VARCHAR},
+      </if>
+      <if test="networkCard != null">
+        #{networkCard,jdbcType=VARCHAR},
+      </if>
+      <if test="pcname != null">
+        #{pcname,jdbcType=VARCHAR},
+      </if>
+      <if test="f2version != null">
+        #{f2version,jdbcType=VARCHAR},
+      </if>
+      <if test="accessmode != null">
+        #{accessmode,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="systeminfo != null">
+        #{systeminfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null">
+        #{ipaddress,jdbcType=DECIMAL},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=DECIMAL},
+      </if>
+      <if test="serverNo != null">
+        #{serverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="f2ip != null">
+        #{f2ip,jdbcType=DECIMAL},
+      </if>
+      <if test="captureTime != null">
+        #{captureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restoreTime != null">
+        #{restoreTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devNo != null">
+        #{devNo,jdbcType=VARCHAR},
+      </if>
+      <if test="slocation != null">
+        #{slocation,jdbcType=VARCHAR},
+      </if>
+      <if test="locInfoTime != null">
+        #{locInfoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessWay != null">
+        #{accessWay,jdbcType=DECIMAL},
+      </if>
+      <if test="imsi != null">
+        #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="msisdn != null">
+        #{msisdn,jdbcType=VARCHAR},
+      </if>
+      <if test="locInfoContentid != null">
+        #{locInfoContentid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.trusteye.f2.pojo.po.F2sesnkeySetExample" resultType="java.lang.Long">
+    select count(*) from F2SESNKEY_SET
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update F2SESNKEY_SET
+    <set>
+      <if test="record.sesnkey != null">
+        SESNKEY = #{record.sesnkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allnum != null">
+        ALLNUM = #{record.allnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.newnum != null">
+        NEWNUM = #{record.newnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.postAllnum != null">
+        POST_ALLNUM = #{record.postAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.postNewnum != null">
+        POST_NEWNUM = #{record.postNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.getAllnum != null">
+        GET_ALLNUM = #{record.getAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.getNewnum != null">
+        GET_NEWNUM = #{record.getNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.responseAllnum != null">
+        RESPONSE_ALLNUM = #{record.responseAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.responseNewnum != null">
+        RESPONSE_NEWNUM = #{record.responseNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherAllnum != null">
+        OTHER_ALLNUM = #{record.otherAllnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherNewnum != null">
+        OTHER_NEWNUM = #{record.otherNewnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realnicmac != null">
+        REALNICMAC = #{record.realnicmac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.networkCard != null">
+        NETWORK_CARD = #{record.networkCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcname != null">
+        PCNAME = #{record.pcname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.f2version != null">
+        F2VERSION = #{record.f2version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessmode != null">
+        ACCESSMODE = #{record.accessmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.browser != null">
+        BROWSER = #{record.browser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systeminfo != null">
+        SYSTEMINFO = #{record.systeminfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipaddress != null">
+        IPADDRESS = #{record.ipaddress,jdbcType=DECIMAL},
+      </if>
+      <if test="record.timestamp != null">
+        TIMESTAMP = #{record.timestamp,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serverNo != null">
+        SERVER_NO = #{record.serverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.f2ip != null">
+        F2IP = #{record.f2ip,jdbcType=DECIMAL},
+      </if>
+      <if test="record.captureTime != null">
+        CAPTURE_TIME = #{record.captureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.restoreTime != null">
+        RESTORE_TIME = #{record.restoreTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.devNo != null">
+        DEV_NO = #{record.devNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slocation != null">
+        SLOCATION = #{record.slocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locInfoTime != null">
+        LOC_INFO_TIME = #{record.locInfoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accessWay != null">
+        ACCESS_WAY = #{record.accessWay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.imsi != null">
+        IMSI = #{record.imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msisdn != null">
+        MSISDN = #{record.msisdn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locInfoContentid != null">
+        LOC_INFO_CONTENTID = #{record.locInfoContentid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update F2SESNKEY_SET
+    set SESNKEY = #{record.sesnkey,jdbcType=VARCHAR},
+      ALLNUM = #{record.allnum,jdbcType=DECIMAL},
+      NEWNUM = #{record.newnum,jdbcType=DECIMAL},
+      POST_ALLNUM = #{record.postAllnum,jdbcType=DECIMAL},
+      POST_NEWNUM = #{record.postNewnum,jdbcType=DECIMAL},
+      GET_ALLNUM = #{record.getAllnum,jdbcType=DECIMAL},
+      GET_NEWNUM = #{record.getNewnum,jdbcType=DECIMAL},
+      RESPONSE_ALLNUM = #{record.responseAllnum,jdbcType=DECIMAL},
+      RESPONSE_NEWNUM = #{record.responseNewnum,jdbcType=DECIMAL},
+      OTHER_ALLNUM = #{record.otherAllnum,jdbcType=DECIMAL},
+      OTHER_NEWNUM = #{record.otherNewnum,jdbcType=DECIMAL},
+      REALNICMAC = #{record.realnicmac,jdbcType=VARCHAR},
+      NETWORK_CARD = #{record.networkCard,jdbcType=VARCHAR},
+      PCNAME = #{record.pcname,jdbcType=VARCHAR},
+      F2VERSION = #{record.f2version,jdbcType=VARCHAR},
+      ACCESSMODE = #{record.accessmode,jdbcType=VARCHAR},
+      BROWSER = #{record.browser,jdbcType=VARCHAR},
+      SYSTEMINFO = #{record.systeminfo,jdbcType=VARCHAR},
+      IPADDRESS = #{record.ipaddress,jdbcType=DECIMAL},
+      TIMESTAMP = #{record.timestamp,jdbcType=DECIMAL},
+      SERVER_NO = #{record.serverNo,jdbcType=VARCHAR},
+      F2IP = #{record.f2ip,jdbcType=DECIMAL},
+      CAPTURE_TIME = #{record.captureTime,jdbcType=TIMESTAMP},
+      RESTORE_TIME = #{record.restoreTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      DEV_NO = #{record.devNo,jdbcType=VARCHAR},
+      SLOCATION = #{record.slocation,jdbcType=VARCHAR},
+      LOC_INFO_TIME = #{record.locInfoTime,jdbcType=TIMESTAMP},
+      ACCESS_WAY = #{record.accessWay,jdbcType=DECIMAL},
+      IMSI = #{record.imsi,jdbcType=VARCHAR},
+      MSISDN = #{record.msisdn,jdbcType=VARCHAR},
+      LOC_INFO_CONTENTID = #{record.locInfoContentid,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

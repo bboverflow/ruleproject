@@ -1,0 +1,108 @@
+{
+  "menus": [
+    {
+      "icon": "icon-sys",
+      "menuid": "1",
+      "menuname": "用户管理",
+      "url": "",
+      "menus": [
+        {
+          "icon": "icon-log",
+          "menuid": "1_1",
+          "menuname": "设置用户",
+          "url": "/admin/queryUser.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "1_2",
+          "menuname": "登录设置",
+          "url": "/admin/queryobject.action"
+        }
+      ]
+    },
+    {
+      "icon": "icon-sys",
+      "menuid": "2",
+      "menuname": "数据库维护",
+      "url": "",
+      "menus": [
+        {
+          "icon": "icon-log",
+          "menuid": "2_1",
+          "menuname": "数据库配置",
+          "url": "/admin/queryPost.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "2_2",
+          "menuname": "数据库维护",
+          "url": "/admin/queryobject.action"
+        }
+      ]
+    },
+    {
+      "icon": "icon-sys",
+      "menuid": "2",
+      "menuname": "系统升级",
+      "url": "",
+      "menus": [
+        {
+          "icon": "icon-log",
+          "menuid": "3_1",
+          "menuname": "服务器软件版本升级",
+          "url": "/admin/queryPost.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "3_2",
+          "menuname": "服务器软件版本升级历史",
+          "url": "/admin/querySession.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "3_3",
+          "menuname": "引擎特征库升级",
+          "url": "/admin/queryfulltext.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "3_4",
+          "menuname": "引擎特征库升级历史",
+          "url": "/admin/queryWord.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "3_5",
+          "menuname": "引擎软件版本升级",
+          "url": "/admin/queryweb.action"
+        }
+      ]
+    },
+    {
+      "icon": "icon-sys",
+      "menuid": "4",
+      "menuname": "系统管理",
+      "url": "",
+      "menus": [
+        {
+          "icon": "icon-log",
+          "menuid": "4_1",
+          "menuname": "恢复出厂设置",
+          "url": "/admin/queryPost.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "4_2",
+          "menuname": "管理口IP设置",
+          "url": "/admin/querySession.action"
+        },
+        {
+          "icon": "icon-log",
+          "menuid": "4_3",
+          "menuname": "域名管理",
+          "url": "/admin/queryfulltext.action"
+        }
+      ]
+    }
+  ]
+}

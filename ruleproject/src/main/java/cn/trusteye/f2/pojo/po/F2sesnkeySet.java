@@ -1,7 +1,6 @@
 package cn.trusteye.f2.pojo.po;
 
 import cn.trusteye.base.util.DateSerializer;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;

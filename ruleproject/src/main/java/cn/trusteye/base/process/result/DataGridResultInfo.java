@@ -1,11 +1,10 @@
-package cn.trusteye.base.result;
+package cn.trusteye.base.process.result;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 数据查询列表结果
- * @author Thinkpad
  *
  */
 public class DataGridResultInfo {

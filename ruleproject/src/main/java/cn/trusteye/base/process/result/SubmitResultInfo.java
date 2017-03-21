@@ -1,9 +1,8 @@
-package cn.trusteye.base.result;
+package cn.trusteye.base.process.result;
 
 
 /**
  * 系统提交结果结果类型
- * @author Thinkpad
  *
  */
 public class SubmitResultInfo {

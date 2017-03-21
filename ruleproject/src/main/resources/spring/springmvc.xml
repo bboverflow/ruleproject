@@ -1,128 +1,135 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
-	<!--组件扫描
-	可以扫描controller、service、...
-	这里让扫描controller，指定controller的包
-	 -->
-	<context:component-scan base-package="cn.trusteye.f2.action,cn.trusteye.base.action"/>
+    <!--组件扫描
+    可以扫描controller、service、...
+    这里让扫描controller，指定controller的包
+     -->
+    <context:component-scan base-package="cn.trusteye.f2.action,cn.trusteye.base.action"/>
 
 
-	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
-	 -->
-	<mvc:annotation-driven
-			conversion-service="conversionService"
-			validator="validator">
-		<!-- 处理responseBody 里面日期类型 -->
-		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper">
-					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-						<property name="dateFormat">
-							<bean class="java.text.SimpleDateFormat">
-								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
-							</bean>
-						</property>
-					</bean>
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
+    <!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
+     -->
+    <mvc:annotation-driven
+            conversion-service="conversionService">
+            <!--validator="validator">-->
+        <!-- 处理responseBody 里面日期类型 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 
+    <!-- 视图解析器
+    解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包
+     -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置jsp路径的前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 配置jsp路径的后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
 
-	<!-- 视图解析器
-	解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包
-	 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- 配置jsp路径的前缀 -->
-		<property name="prefix" value="/WEB-INF/jsp/"/>
-		<!-- 配置jsp路径的后缀 -->
-		<property name="suffix" value=".jsp"/>
-	</bean>
-
-
-	 <!--自定义参数绑定-->
-	<bean id="conversionService"
-		  class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<!-- 转换器 -->
-		<property name="converters">
-			<list>
-				<!--日期类型转换-->
-				<bean class="cn.trusteye.base.action.converter.CustomDateConverter"/>
-			</list>
-		</property>
-	</bean>
-
-	<!-- 校验器 -->
-	<bean id="validator"
-		  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-		<!-- 校验器-->
-		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
-		<!-- 指定校验使用的资源文件，如果不指定则默认使用classpath下的ValidationMessages.properties -->
-		<property name="validationMessageSource" ref="messageSource" />
-	</bean>
-
-	<!-- 校验错误信息配置文件 -->
-	<bean id="messageSource"
-		  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<!-- 资源文件名-->
-		<property name="basenames">
-			<list>
-				<value>classpath:CustomValidationMessages</value>
-			</list>
-		</property>
-		<!-- 资源文件编码格式 -->
-		<property name="defaultEncoding" value="utf-8" />
-		<!-- 对资源文件内容缓存时间，单位秒 -->
-		<property name="cacheSeconds" value="120" />
-	</bean>
-
-
-	<!--全局异常处理器-->
-	<bean class="cn.trusteye.base.exception.CustomExceptionResolver"></bean>
+    <!--自定义参数绑定-->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <list>
+                <!--日期类型转换-->
+                <bean class="cn.trusteye.base.action.converter.CustomDateConverter"/>
+            </list>
+        </property>
+    </bean>
 
 <!--
+    &lt;!&ndash; 校验器 &ndash;&gt;
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        &lt;!&ndash; 校验器&ndash;&gt;
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        &lt;!&ndash; 指定校验使用的资源文件，如果不指定则默认使用classpath下的ValidationMessages.properties &ndash;&gt;
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
 
-	&lt;!&ndash; 文件上传 &ndash;&gt;
-	<bean id="multipartResolver"
-		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		&lt;!&ndash; 设置上传文件的最大尺寸为5MB &ndash;&gt;
-		<property name="maxUploadSize">
-			<value>5242880</value>
-		</property>
-	</bean>
+
+     校验错误信息配置文件
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        &lt;!&ndash; 资源文件名&ndash;&gt;
+        <property name="basenames">
+            <list>
+                <value>classpath:CustomValidationMessages</value>
+            </list>
+        </property>
+        &lt;!&ndash; 资源文件编码格式 &ndash;&gt;
+        <property name="defaultEncoding" value="utf-8"/>
+        &lt;!&ndash; 对资源文件内容缓存时间，单位秒 &ndash;&gt;
+        <property name="cacheSeconds" value="120"/>
+    </bean>
 -->
 
-<!--
 
-	&lt;!&ndash;全局拦截器&ndash;&gt;
-	<mvc:interceptors>
-		&lt;!&ndash;身份认证拦截器&ndash;&gt;
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<bean class="cn.trusteye.base.interceptor.HandlerInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<bean class="cn.trusteye.base.interceptor.HandlerInterceptor1"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<bean class="cn.trusteye.base.interceptor.HandlerInterceptor2"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
--->
+    <!--json转换器-->
+    <bean id="jsonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    </bean>
+    <!--全局异常处理器-->
+    <bean id="handlerExceptionResolver" class="cn.trusteye.base.process.exception.ExceptionResolverCustom">
+        <!--注入一个json转换器-->
+        <property name="jsonMessageConverter" ref="jsonMessageConverter"/>
+    </bean>
 
+    <!--
+
+        &lt;!&ndash; 文件上传 &ndash;&gt;
+        <bean id="multipartResolver"
+              class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+            &lt;!&ndash; 设置上传文件的最大尺寸为5MB &ndash;&gt;
+            <property name="maxUploadSize">
+                <value>5242880</value>
+            </property>
+        </bean>
+    -->
+
+    <!--
+
+        &lt;!&ndash;全局拦截器&ndash;&gt;
+        <mvc:interceptors>
+            &lt;!&ndash;身份认证拦截器&ndash;&gt;
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <bean class="cn.trusteye.base.interceptor.HandlerInterceptor"/>
+            </mvc:interceptor>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <bean class="cn.trusteye.base.interceptor.HandlerInterceptor1"/>
+            </mvc:interceptor>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <bean class="cn.trusteye.base.interceptor.HandlerInterceptor2"/>
+            </mvc:interceptor>
+        </mvc:interceptors>
+    -->
 
 </beans>

@@ -1,4 +1,4 @@
-package cn.trusteye.base.result;
+package cn.trusteye.base.process.result;
 
 import java.util.HashMap;
 import java.util.List;

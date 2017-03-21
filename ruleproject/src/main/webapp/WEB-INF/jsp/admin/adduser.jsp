@@ -120,7 +120,7 @@
                         <TD height=30 width="15%" align=right>角色类型：</TD>
                         <TD class=category width="35%">
                             <div>
-                                <select id="user_rolename" name="userCustom.rolename">
+                                <select id="user_roleid" name="userCustom.roleid">
                                     <option value="">请选择</option>
 
                     <c:forEach var="role" items="${roleList}">
@@ -145,6 +145,7 @@
                         <TD class=category width="35%">
                             <input type="text" name="userCustom.department"/>
                         </TD>
+
                         <TD height=30 width="15%" align=right>用户状态：</TD>
                         <TD class=category width="35%">
                             <input type="radio" name="userCustom.locked" value="1"/>锁定

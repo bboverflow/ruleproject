@@ -1,7 +1,7 @@
-package cn.trusteye.base.exception;
+package cn.trusteye.base.process.exception;
 
-import cn.trusteye.base.result.ExceptionResultInfo;
-import cn.trusteye.base.result.ResultInfo;
+import cn.trusteye.base.process.result.ExceptionResultInfo;
+import cn.trusteye.base.process.result.ResultInfo;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
  * * Created by Rayman on 2017/3/1.
  * 全局异常处理器
  */
-public class CustomExceptionResolver implements HandlerExceptionResolver {
+public class ExceptionResolverCustom implements HandlerExceptionResolver {
     //json转换器
     //将异常信息转换json
     private HttpMessageConverter<ExceptionResultInfo> jsonMessageConverter;
@@ -31,11 +31,12 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 
         //输出异常信息
         ex.printStackTrace();
+        //获得action方法
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         ResponseBody responseBody = AnnotationUtils.findAnnotation(method, ResponseBody.class);
+        //判断action方法是否要输出json
         if (responseBody != null) {
-            //将异常信息转JSON输出
             return resolveJsonException(request, response, handler, ex);
         }
         //acion返回的是jsp页面
@@ -47,7 +48,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("exceptionResultInfo", exceptionResultInfo.getResultInfo());
-        modelAndView.setViewName("items/error");
+        modelAndView.setViewName("base/error");
 
         return modelAndView;
     }
@@ -80,4 +81,11 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         return new ModelAndView();
     }
 
+    public HttpMessageConverter<ExceptionResultInfo> getJsonMessageConverter() {
+        return jsonMessageConverter;
+    }
+
+    public void setJsonMessageConverter(HttpMessageConverter<ExceptionResultInfo> jsonMessageConverter) {
+        this.jsonMessageConverter = jsonMessageConverter;
+    }
 }

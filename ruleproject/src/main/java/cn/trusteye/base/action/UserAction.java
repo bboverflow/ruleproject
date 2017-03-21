@@ -1,11 +1,12 @@
 package cn.trusteye.base.action;
 
 import cn.trusteye.base.pojo.po.SysRole;
-import cn.trusteye.base.pojo.pocustom.SysRoleCustom;
 import cn.trusteye.base.pojo.pocustom.SysUserCustom;
 import cn.trusteye.base.pojo.vo.RoleQueryVo;
 import cn.trusteye.base.pojo.vo.UserQueryVo;
-import cn.trusteye.base.result.DataGridResultInfo;
+import cn.trusteye.base.process.result.DataGridResultInfo;
+import cn.trusteye.base.process.result.ResultUtil;
+import cn.trusteye.base.process.result.SubmitResultInfo;
 import cn.trusteye.base.service.UserService;
 import cn.trusteye.base.util.PageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
+import cn.trusteye.base.process.context.*;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Rayman on 2017/3/16.
@@ -68,22 +69,18 @@ public class UserAction {
     //提交结果转json输出到页面
     @RequestMapping("/addusersubmit")
     public @ResponseBody
-    Map<String,Object> addusersubmit(UserQueryVo userQueryVo) throws Exception{
+    SubmitResultInfo addusersubmit(UserQueryVo userQueryVo) throws Exception{
 
-        int type = 0;//成功
-        String message = "成功";
+/*
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+        resultInfo.setMessage("操作成功");
+*/
 
-        try {
-            userService.insertUser(userQueryVo.getUserCustom());
-        } catch (Exception e) {
-            type=1;
-            message = e.getMessage();
-        }
+        userService.insertUser(userQueryVo.getUserCustom());
 
-        Map<String,Object> result_map = new HashMap<String,Object>();
-        result_map.put("type",type);
-        result_map.put("message",message);
+//        return new SubmitResultInfo(resultInfo);
 
-        return result_map;
+        return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Configure.MESSAGE, 906, null));
     }
 }

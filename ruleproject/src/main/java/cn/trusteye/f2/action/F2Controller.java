@@ -1,6 +1,6 @@
 package cn.trusteye.f2.action;
 
-import cn.trusteye.base.result.DataGridResultInfo;
+import cn.trusteye.base.process.result.DataGridResultInfo;
 import cn.trusteye.base.util.PageQuery;
 import cn.trusteye.f2.pojo.pocustom.F2sesnkeySetCustom;
 import cn.trusteye.f2.pojo.vo.F2sessionQueryVo;
@@ -8,7 +8,6 @@ import cn.trusteye.f2.service.F2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
